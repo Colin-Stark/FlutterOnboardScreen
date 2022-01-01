@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 void main()=> runApp(MyApp());
 
@@ -30,7 +31,8 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     onboardPages = TabController(
-      length: 3, vsync: this,
+      length: 3, 
+      vsync: this,
     );
   }
 
@@ -45,27 +47,64 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
               controller: onboardPages,
               children: [
                 Container(
-                  child: Center(child: Text('First Page of the Onboard Screen')),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Flexible(
+                          fit: FlexFit.tight,
+                          child: Lottie.network(
+                            'https://assets7.lottiefiles.com/packages/lf20_YnsM0o.json',
+                            alignment: Alignment.center,
+                          ), 
+                        ),
+                        Align(alignment: Alignment.bottomCenter,
+                        child: Text("Welcome to the world of junk food, we are here to serve",textAlign: TextAlign.center,style: TextStyle(fontSize: 18,),),)
+                      ],
+                    )
+                  ),
                 ),
                 Container(
-                  child: Center(child: Text('Second Page of the Onboard Screen')),
+                  child: Column(
+                    children: [
+                      Flexible(
+                        fit: FlexFit.tight,
+                        child: Lottie.asset(
+                          'assets/packagehand.zip',
+                          alignment: Alignment.center
+                        ),
+                      ),
+                      Align(alignment: Alignment.bottomCenter,
+                        child: Text("Let us deliver your food to you in a neatly packed package.",textAlign: TextAlign.center,style: TextStyle(fontSize: 18,),),)
+                    ],
+                  )
                 ),
                 Container(
                   child: Center(child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 40),
-                        child: Text('Third Page of the Onboard Screen'),
+                      Flexible(
+                        fit: FlexFit.tight,
+                        child: Lottie.asset('assets/receipt.json'),
                       ),
-                      SizedBox( 
-                        width: MediaQuery.of(context).size.width - 150,
-                        child: TextButton(onPressed: (){}, 
-                          child: Text('Get Started'),
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            primary: Colors.white,
-                          )
+                      Flexible(
+                        fit: FlexFit.loose,
+                        child: Text(
+                          "View your transaction receipt, Payments Made and many more on the app",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: SizedBox( 
+                          width: MediaQuery.of(context).size.width - 150,
+                          child: TextButton(onPressed: (){}, 
+                            child: Text('Get Started'),
+                            style: TextButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              primary: Colors.white,
+                            )
+                          ),
                         ),
                       )
                     ],
@@ -87,3 +126,9 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
     );
   }
 }
+
+
+// ERRORS YOU MIGHT FACE
+// YOU DIDNT ADD "WITH SINGLETICKERPROVIDERMIX" SO IT IS SHOWING YOU 
+// LENGTH DOES NOT MATCH
+// SIZING PROBLEM
